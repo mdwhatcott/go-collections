@@ -14,4 +14,4 @@ doc:
 		echo >> README.md && \
 		go doc -all set  | sed 's/^/\t/' >> README.md && \
 		echo '---' >> README.md && \
-		echo >> README.md && \
+		echo >> README.md
