@@ -12,6 +12,9 @@ doc:
 		head -n 1 go.mod | sed 's/^module //' >> README.md && \
 		echo >> README.md && \
 		echo >> README.md && \
+		go doc -all list  | sed 's/^/\t/' >> README.md && \
+		echo '---' >> README.md && \
+		echo >> README.md
 		go doc -all set  | sed 's/^/\t/' >> README.md && \
 		echo '---' >> README.md && \
 		echo >> README.md
