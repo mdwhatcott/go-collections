@@ -61,10 +61,10 @@ func TestUpdate(t *testing.T) {
 	assert.That(t, list.At(2)).Equals(3)
 }
 func TestPopAt(t *testing.T) {
-	list := From[int](1, 2, 3)
-	pop := list.PopAt(1)
-	assert.That(t, pop).Equals(2)
-	assert.That(t, list.Slice()).Equals([]int{1, 3})
+	list := From[int](1, 2, 1)
+	pop := list.PopAt(2)
+	assert.That(t, pop).Equals(1)
+	assert.That(t, list.Slice()).Equals([]int{1, 2})
 }
 func TestPop(t *testing.T) {
 	list := From[int](1, 2, 3)

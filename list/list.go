@@ -23,10 +23,7 @@ func (l *List[T]) Append(items ...T) {
 	l.items = append(l.items, items...)
 }
 func (l *List[T]) Remove(needle T) {
-	var zero T
-	i := l.Index(needle)
-	l.items[i] = zero
-	l.items = append(l.items[:i], l.items[i+1:]...)
+	l.remove(l.Index(needle))
 }
 func (l *List[T]) Clear() {
 	var zero T
@@ -61,7 +58,7 @@ func (l *List[T]) Update(i int, item T) {
 }
 func (l *List[T]) PopAt(i int) T {
 	pop := l.items[i]
-	l.Remove(pop)
+	defer l.remove(i)
 	return pop
 }
 func (l *List[T]) Pop() T {
@@ -74,4 +71,9 @@ func (l *List[T]) Index(needle T) int {
 		}
 	}
 	return -1
+}
+func (l *List[T]) remove(i int) {
+	var zero T
+	l.items[i] = zero
+	l.items = append(l.items[:i], l.items[i+1:]...)
 }
