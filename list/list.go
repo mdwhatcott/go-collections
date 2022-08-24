@@ -13,6 +13,9 @@ func New[T comparable](size int) *List[T] {
 func From[T comparable](items ...T) *List[T] {
 	return &List[T]{items: items}
 }
+func (l *List[T]) Empty() bool {
+	return l.Len() == 0
+}
 func (l *List[T]) Len() int {
 	return len(l.items)
 }
