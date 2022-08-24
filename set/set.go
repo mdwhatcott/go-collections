@@ -12,6 +12,9 @@ func From[T comparable](items ...T) (result Set[T]) {
 	result.Add(items...)
 	return result
 }
+func (s Set[T]) Empty() bool {
+	return s.Len() == 0
+}
 func (s Set[T]) Len() int {
 	return len(s)
 }

@@ -11,6 +11,8 @@ func TestCreation(t *testing.T) {
 	assert.That(t, len(New[int](0))).Equals(0)
 	assert.That(t, len(From[int]())).Equals(0)
 	assert.That(t, From[int]().Len()).Equals(0)
+	assert.That(t, From[int]().Empty()).IsTrue()
+	assert.That(t, From[int](1).Empty()).IsFalse()
 }
 func TestContains(t *testing.T) {
 	assert.That(t, From[int](1).Contains(1)).IsTrue()
