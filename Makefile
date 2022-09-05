@@ -12,9 +12,15 @@ doc:
 		head -n 1 go.mod | sed 's/^module //' >> README.md && \
 		echo >> README.md && \
 		echo >> README.md && \
-		go doc -all list  | sed 's/^/\t/' >> README.md && \
+		go doc -all github.com/mdwhatcott/go-collections/list  | sed 's/^/\t/' >> README.md && \
 		echo '---' >> README.md && \
 		echo >> README.md
-		go doc -all set  | sed 's/^/\t/' >> README.md && \
+		go doc -all github.com/mdwhatcott/go-collections/queue  | sed 's/^/\t/' >> README.md && \
+		echo '---' >> README.md && \
+		echo >> README.md
+		go doc -all github.com/mdwhatcott/go-collections/set  | sed 's/^/\t/' >> README.md && \
+		echo '---' >> README.md && \
+		echo >> README.md
+		go doc -all github.com/mdwhatcott/go-collections/stack  | sed 's/^/\t/' >> README.md && \
 		echo '---' >> README.md && \
 		echo >> README.md

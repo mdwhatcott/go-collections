@@ -2,100 +2,73 @@
 
 
 
-	package list // import "container/list"
+	package list // import "github.com/mdwhatcott/go-collections/list"
 	
-	Package list implements a doubly linked list.
-	
-	To iterate over a list (where l is a *List):
-	
-	    for e := l.Front(); e != nil; e = e.Next() {
-	    	// do something with e.Value
-	    }
+	Package list implements a generic array list type. The API was inspired
+	by Python's built-in list. https://en.wikipedia.org/wiki/Dynamic_array
+	https://docs.python.org/3/tutorial/introduction.html#lists
+	https://docs.python.org/3/tutorial/datastructures.html#more-on-lists
 	
 	TYPES
 	
-	type Element struct {
-	
-		// The value stored with this element.
-		Value any
+	type List[T comparable] struct {
 		// Has unexported fields.
 	}
-	    Element is an element of a linked list.
 	
-	func (e *Element) Next() *Element
-	    Next returns the next list element or nil.
+	func From[T comparable](items ...T) *List[T]
 	
-	func (e *Element) Prev() *Element
-	    Prev returns the previous list element or nil.
+	func New[T comparable](size int) *List[T]
 	
-	type List struct {
+	func (l *List[T]) Append(items ...T)
+	
+	func (l *List[T]) At(i int) T
+	
+	func (l *List[T]) Clear()
+	
+	func (l *List[T]) Contains(needle T) bool
+	
+	func (l *List[T]) Empty() bool
+	
+	func (l *List[T]) Equal(o *List[T]) bool
+	
+	func (l *List[T]) Index(needle T) int
+	
+	func (l *List[T]) Len() int
+	
+	func (l *List[T]) Pop() T
+	
+	func (l *List[T]) PopAt(i int) T
+	
+	func (l *List[T]) Remove(needle T)
+	
+	func (l *List[T]) Slice() (results []T)
+	
+	func (l *List[T]) Update(i int, item T)
+	
+---
+
+	package queue // import "github.com/mdwhatcott/go-collections/queue"
+	
+	
+	TYPES
+	
+	type Queue[T comparable] struct {
 		// Has unexported fields.
 	}
-	    List represents a doubly linked list. The zero value for List is an empty
-	    list ready to use.
 	
-	func New() *List
-	    New returns an initialized list.
+	func New[T comparable](size int) *Queue[T]
 	
-	func (l *List) Back() *Element
-	    Back returns the last element of list l or nil if the list is empty.
+	func (s *Queue[T]) Dequeue() T
 	
-	func (l *List) Front() *Element
-	    Front returns the first element of list l or nil if the list is empty.
+	func (s *Queue[T]) Empty() bool
 	
-	func (l *List) Init() *List
-	    Init initializes or clears list l.
+	func (s *Queue[T]) Enqueue(t T)
 	
-	func (l *List) InsertAfter(v any, mark *Element) *Element
-	    InsertAfter inserts a new element e with value v immediately after mark
-	    and returns e. If mark is not an element of l, the list is not modified.
-	    The mark must not be nil.
+	func (s *Queue[T]) Len() int
 	
-	func (l *List) InsertBefore(v any, mark *Element) *Element
-	    InsertBefore inserts a new element e with value v immediately before mark
-	    and returns e. If mark is not an element of l, the list is not modified.
-	    The mark must not be nil.
+	func (s *Queue[T]) Peek() T
 	
-	func (l *List) Len() int
-	    Len returns the number of elements of list l. The complexity is O(1).
-	
-	func (l *List) MoveAfter(e, mark *Element)
-	    MoveAfter moves element e to its new position after mark. If e or mark is
-	    not an element of l, or e == mark, the list is not modified. The element and
-	    mark must not be nil.
-	
-	func (l *List) MoveBefore(e, mark *Element)
-	    MoveBefore moves element e to its new position before mark. If e or mark is
-	    not an element of l, or e == mark, the list is not modified. The element and
-	    mark must not be nil.
-	
-	func (l *List) MoveToBack(e *Element)
-	    MoveToBack moves element e to the back of list l. If e is not an element of
-	    l, the list is not modified. The element must not be nil.
-	
-	func (l *List) MoveToFront(e *Element)
-	    MoveToFront moves element e to the front of list l. If e is not an element
-	    of l, the list is not modified. The element must not be nil.
-	
-	func (l *List) PushBack(v any) *Element
-	    PushBack inserts a new element e with value v at the back of list l and
-	    returns e.
-	
-	func (l *List) PushBackList(other *List)
-	    PushBackList inserts a copy of another list at the back of list l. The lists
-	    l and other may be the same. They must not be nil.
-	
-	func (l *List) PushFront(v any) *Element
-	    PushFront inserts a new element e with value v at the front of list l and
-	    returns e.
-	
-	func (l *List) PushFrontList(other *List)
-	    PushFrontList inserts a copy of another list at the front of list l.
-	    The lists l and other may be the same. They must not be nil.
-	
-	func (l *List) Remove(e *Element) any
-	    Remove removes e from l if e is an element of list l. It returns the element
-	    value e.Value. The element must not be nil.
+	func (s *Queue[T]) Slice() []T
 	
 ---
 
@@ -120,6 +93,8 @@
 	
 	func (s Set[T]) Difference(that Set[T]) (result Set[T])
 	
+	func (s Set[T]) Empty() bool
+	
 	func (s Set[T]) Equal(that Set[T]) bool
 	
 	func (s Set[T]) Intersection(that Set[T]) (result Set[T])
@@ -137,6 +112,31 @@
 	func (s Set[T]) SymmetricDifference(that Set[T]) (result Set[T])
 	
 	func (s Set[T]) Union(that Set[T]) (result Set[T])
+	
+---
+
+	package stack // import "github.com/mdwhatcott/go-collections/stack"
+	
+	
+	TYPES
+	
+	type Stack[T comparable] struct {
+		// Has unexported fields.
+	}
+	
+	func New[T comparable](size int) *Stack[T]
+	
+	func (s *Stack[T]) Empty() bool
+	
+	func (s *Stack[T]) Len() int
+	
+	func (s *Stack[T]) Peek() T
+	
+	func (s *Stack[T]) Pop() T
+	
+	func (s *Stack[T]) Push(t T)
+	
+	func (s *Stack[T]) Slice() []T
 	
 ---
 
