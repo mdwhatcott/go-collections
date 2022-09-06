@@ -3,28 +3,28 @@ package stack
 import (
 	"testing"
 
-	"github.com/mdwhatcott/go-collections/internal/assert"
+	"github.com/mdwhatcott/go-collections/internal/should"
 )
 
 func TestStack(t *testing.T) {
 	s := New[int](0)
-	assert.That(t, s.Len()).Equals(0)
-	assert.That(t, s.Empty()).IsTrue()
+	should.So(t, s.Len(), should.Equal, 0)
+	should.So(t, s.Empty(), should.BeTrue)
 	s.Push(42)
 	s.Push(43)
 	s.Push(44)
-	assert.That(t, s.Len()).Equals(3)
-	assert.That(t, s.Empty()).IsFalse()
-	assert.That(t, s.Peek()).Equals(44)
-	assert.That(t, s.Slice()).Equals([]int{42, 43, 44})
+	should.So(t, s.Len(), should.Equal, 3)
+	should.So(t, s.Empty(), should.BeFalse)
+	should.So(t, s.Peek(), should.Equal, 44)
+	should.So(t, s.Slice(), should.Equal, []int{42, 43, 44})
 	p1 := s.Pop()
 	p2 := s.Pop()
 	p3 := s.Pop()
-	assert.That(t, s.Len()).Equals(0)
-	assert.That(t, s.Empty()).IsTrue()
-	assert.That(t, p1).Equals(44)
-	assert.That(t, p2).Equals(43)
-	assert.That(t, p3).Equals(42)
+	should.So(t, s.Len(), should.Equal, 0)
+	should.So(t, s.Empty(), should.BeTrue)
+	should.So(t, p1, should.Equal, 44)
+	should.So(t, p2, should.Equal, 43)
+	should.So(t, p3, should.Equal, 42)
 
 	defer func() { recover() }()
 	s.Pop()
