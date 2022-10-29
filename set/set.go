@@ -12,6 +12,13 @@ func From[T comparable](items ...T) (result Set[T]) {
 	result.Add(items...)
 	return result
 }
+func FromMapKeys[K comparable, V any](m map[K]V) (result Set[K]) {
+	result = New[K](len(m))
+	for key := range m {
+		result.Add(key)
+	}
+	return result
+}
 func (s Set[T]) Empty() bool {
 	return s.Len() == 0
 }

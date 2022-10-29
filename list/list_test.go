@@ -9,7 +9,6 @@ import (
 func TestCreation(t *testing.T) {
 	should.So(t, New[int](0).Len(), should.Equal, 0)
 	should.So(t, From[int]().Len(), should.Equal, 0)
-	should.So(t, From[int]().Len(), should.Equal, 0)
 	should.So(t, From[int]().Empty(), should.BeTrue)
 	should.So(t, From[int](1).Empty(), should.BeFalse)
 }

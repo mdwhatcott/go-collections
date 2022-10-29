@@ -13,6 +13,8 @@ func TestCreation(t *testing.T) {
 	should.So(t, From[int]().Len(), should.Equal, 0)
 	should.So(t, From[int]().Empty(), should.BeTrue)
 	should.So(t, From[int](1).Empty(), should.BeFalse)
+	should.So(t, FromMapKeys[int](map[int]int{}).Len(), should.Equal, 0)
+	should.So(t, FromMapKeys[int](map[int]int{1: 4, 2: 5, 3: 6}), should.Equal, From[int](1, 2, 3))
 }
 func TestContains(t *testing.T) {
 	should.So(t, From[int](1).Contains(1), should.BeTrue)
