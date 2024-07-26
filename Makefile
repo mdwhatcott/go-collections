@@ -4,7 +4,6 @@ test:
 	@go version
 	go fmt ./...
 	go mod tidy
-	@echo
 	go test -cover -count=1 -timeout=1s -race ./...
 
 doc:
